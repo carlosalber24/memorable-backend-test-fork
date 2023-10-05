@@ -5,7 +5,7 @@ import {UploadDataResponse} from "../../fileHandler/entities/UploadDataResponse"
 import {FileHandlerService} from "../../fileHandler/service/FileHandlerService";
 import {User} from "../../users/entities/User";
 import Brand from "../entities/Brand";
-import {CreateBrandInput, UpdateBrandInput} from "../input/BrandInput";
+import {CreateBrandInput, UpdateBrandInput, UpdateStatusBrandInput} from "../input/BrandInput";
 import {BrandRepository} from "../repository/BrandRepository";
 
 @Service()
@@ -36,6 +36,17 @@ export class BrandService extends BaseService {
         const updatedBrand = await this.brandRepository.save(brand);
 
         this.logger.debug(this.updateBrand.name, `Updated brand successfully`);
+        return updatedBrand;
+    }
+
+    async updateBrandStatus(user: User, brandId: string, input: UpdateStatusBrandInput) {
+        this.validateUserAdmin(user, this.createBrand.name);
+
+        const brand = user.getBrand(brandId);
+        brand.updateStatus(input);
+        const updatedBrand = await this.brandRepository.save(brand);
+
+        this.logger.debug(this.updateBrand.name, `Updated brand status successfully`);
         return updatedBrand;
     }
 

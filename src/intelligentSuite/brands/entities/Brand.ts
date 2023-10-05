@@ -3,7 +3,7 @@ import {Column, Entity, ManyToOne} from "typeorm";
 import {BaseEntity} from "../../../common/entities/BaseEntity";
 import {BusinessAccount} from "../../businessAccounts/entities/BusinessAccount";
 import {Sector} from "../../common/entities/Sector";
-import {CreateBrandInput, UpdateBrandInput} from "../input/BrandInput";
+import {CreateBrandInput, UpdateBrandInput, UpdateStatusBrandInput} from "../input/BrandInput";
 
 @ObjectType()
 @Entity()
@@ -32,6 +32,10 @@ export default class Brand extends BaseEntity {
     @Field(() => BusinessAccount)
     businessAccount!: BusinessAccount;
 
+    @Field({nullable: true})
+    @Column({nullable: true})
+    status?: string;
+
     static create(businessAccount: BusinessAccount, input: CreateBrandInput) {
         const brand = new Brand();
         brand.setId();
@@ -46,6 +50,10 @@ export default class Brand extends BaseEntity {
         this.name = input.name || this.name;
         this.sector = input.sector || this.sector;
         this.logoUrl = input.logoUrl || this.logoUrl;
+    }
+
+    updateStatus(input: UpdateStatusBrandInput) {
+        this.status = input.status || this.status;
     }
 }
 
