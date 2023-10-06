@@ -1,0 +1,47 @@
+{
+	"info": {
+		"_postman_id": "4592dddf-5f7c-4a9a-bcee-3e2a9fdafa26",
+		"name": "Memorable-Assesment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1003020",
+		"_collection_link": "https://red-astronaut-889595.postman.co/workspace/Yeaclass~1767a6fb-8eac-41bc-b91a-5aa7e107e839/collection/1003020-4592dddf-5f7c-4a9a-bcee-3e2a9fdafa26?action=share&source=collection_link&creator=1003020"
+	},
+	"item": [
+		{
+			"name": "update-status-brand",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation updateStatusBrand($brandId: String!, $brand: UpdateStatusBrandInput!){\r\n    updateStatusBrand(brandId: $brandId, input: $brand){\r\n        status\r\n    }\r\n}",
+						"variables": "{\r\n  \"brand\": {\r\n    \"status\": \"IN_PROGRESS\"\r\n  },\r\n  \"brandId\": \"01H4618V8XGS613BS5BSPZP180\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3333",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
