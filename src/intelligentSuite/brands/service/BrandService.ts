@@ -40,13 +40,13 @@ export class BrandService extends BaseService {
     }
 
     async updateBrandStatus(user: User, brandId: string, input: UpdateStatusBrandInput) {
-        this.validateUserAdmin(user, this.createBrand.name);
+        this.validateUserAdmin(user, this.updateBrandStatus.name);
 
         const brand = user.getBrand(brandId);
         brand.updateStatus(input);
         const updatedBrand = await this.brandRepository.save(brand);
 
-        this.logger.debug(this.updateBrand.name, `Updated brand status successfully`);
+        this.logger.debug(this.updateBrandStatus.name, `Updated brand status successfully`);
         return updatedBrand;
     }
 
