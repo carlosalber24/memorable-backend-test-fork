@@ -70,6 +70,7 @@ type Brand {
   adAccounts: [String!]
   socialAccounts: [String!]
   businessAccount: BusinessAccount!
+  status: String
 }
 
 enum Sector {
@@ -130,6 +131,9 @@ type Mutation {
   """Updates optional fields of a brand"""
   updateBrand(input: UpdateBrandInput!, brandId: String!): Brand!
 
+  """Updates optional fields of a brand"""
+  updateStatusBrand(input: UpdateStatusBrandInput!, brandId: String!): Brand!
+
   """Updates assets of a brand"""
   updateBrandAssets(input: BrandAssetsInput!, brandId: String!): Brand!
 
@@ -185,6 +189,10 @@ input UpdateBrandInput {
   name: String
   logoUrl: String
   sector: [Sector!]
+}
+
+input UpdateStatusBrandInput {
+  status: String
 }
 
 input BrandAssetsInput {

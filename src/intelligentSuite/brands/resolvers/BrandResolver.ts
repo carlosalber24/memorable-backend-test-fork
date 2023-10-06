@@ -35,7 +35,7 @@ export class BrandResolver {
     }
 
     @Mutation((_returns) => Brand, {description: "Updates optional fields of a brand"})
-    async updateBrandStatus(
+    async updateStatusBrand(
         @CurrentUser() user: User,
         @Arg("brandId") brandId: string,
         @Arg("input") input: UpdateStatusBrandInput,
