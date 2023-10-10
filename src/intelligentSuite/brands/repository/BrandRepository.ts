@@ -7,6 +7,10 @@ import {BrandQuerySet} from "./BrandQuerySet";
 
 @Service()
 export class BrandRepository extends BaseRepository<Brand> {
+    constructor(@InjectRepository(Brand) private repository: Repository<Brand>) {
+        super(repository);
+    }
+
     async updateBrandAssets(brand: Brand, adAccountsIds: number[], socialAccountsIds: number[]) {
         if (adAccountsIds.length > 0) {
             brand.adAccounts = adAccountsIds.map((id) => {
@@ -20,9 +24,6 @@ export class BrandRepository extends BaseRepository<Brand> {
         }
 
         await this.save(brand);
-    }
-    constructor(@InjectRepository(Brand) private repository: Repository<Brand>) {
-        super(repository);
     }
 
     getQuerySet(): BrandQuerySet<Brand> {
